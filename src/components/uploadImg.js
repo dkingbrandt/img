@@ -67,16 +67,20 @@ const UploadImg = () => {
 
     const previewX = x * scaleX;
     const previewY = y * scaleY;
-    const width = cropBoxRef.current.offsetWidth * scaleX;
-    const height = cropBoxRef.current.offsetHeight * scaleY;
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = cropBoxRef.current.offsetWidth;
-    canvas.height = cropBoxRef.current.offsetHeight;
-    ctx.drawImage(imageRef.current, previewX, previewY, width, height, 0, 0, cropBoxRef.current.offsetWidth, cropBoxRef.current.offsetHeight);
-    setImagePreview(canvas.toDataURL());
+    if (cropBoxRef.current) {
+      const width = cropBoxRef.current.offsetWidth * scaleX;
+      const height = cropBoxRef.current.offsetHeight * scaleY;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = cropBoxRef.current.offsetWidth;
+      canvas.height = cropBoxRef.current.offsetHeight;
+      ctx.drawImage(imageRef.current, previewX, previewY, width, height, 0, 0, cropBoxRef.current.offsetWidth, cropBoxRef.current.offsetHeight);
+      setImagePreview(canvas.toDataURL());
+    }
   };
+
 
 
   const handleDragStart = () => {
